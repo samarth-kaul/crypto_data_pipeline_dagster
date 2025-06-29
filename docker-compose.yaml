@@ -1,0 +1,39 @@
+services:
+  dagster_web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DAGSTER_HOME=/app/dagster_home
+    volumes:
+      - .:/app
+      - ./dagster_home:/app/dagster_home
+    depends_on:
+      - minio
+  
+  dagster_daemon:
+    build: .
+    command: ["dagster-daemon", "run"]
+    environment:
+      DAGSTER_HOME: /app/dagster_home
+    volumes:
+      - .:/app
+      - ./dagster_home:/app/dagster_home
+    depends_on:
+      - dagster_web
+
+  minio:
+    image: minio/minio
+    container_name: minio
+    ports:
+      - "9000:9000"  # MinIO server (S3-compatible API)
+      - "9001:9001"  # MinIO Console (Web UI)
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: samarth108
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+
+volumes:
+  minio_data:
