@@ -13,7 +13,7 @@ This project extracts structured crypto market data from the **CoinGecko API**, 
 - 🕹️ **Dagster** for orchestration, manual + scheduled jobs
 - 🪣 **MinIO** for object storage (S3 replacement)
 - 🐳 **Dockerized** for portability and reproducibility
-- 🛠️ **CI/CD-ready** structure (GitHub Actions pipeline coming soon)
+- 🛠️ **CI/CD-ready** structure (to be implemented)
 - 📂 Clean and structured Python codebase with logging, config management, and `.env` usage
 
 ---
